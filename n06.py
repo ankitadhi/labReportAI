@@ -5,4 +5,4 @@ def fact(n):
         return n*fact(n-1)
 
 factorial = fact(3)
-print(factorial)exot
+print(factorial)
