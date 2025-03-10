@@ -3,7 +3,7 @@ from heapq import heappush, heappop
 
 
 initial_state = [
-    [1, 2, 3],
+    [3, 1, 2],
     [4, 0, 5],
     [6, 7, 8]
 ]
@@ -49,7 +49,7 @@ def h2(state, goal):
 
 
 def move_blank(state, direction):
-    new_state = [row[:] for row in state]  # Copy the state
+    new_state = [row[:] for row in state]  
     for i in range(3):
         for j in range(3):
             if state[i][j] == 0:
@@ -79,7 +79,7 @@ def get_nodes(state):
     for direction in directions:
         node = move_blank(state, direction)
         if node:
-            nodes.append((node, direction))  # Return state and move direction
+            nodes.append((node, direction))  
     return nodes
 
 # A* algorithm to solve the 8-puzzle
@@ -87,12 +87,12 @@ def get_nodes(state):
 
 def a_star_8_puzzle(initial, goal):
     open_set = []
-    heappush(open_set, (0, initial, []))  # Add state and path
+    heappush(open_set, (0, initial, []))  
     visited = set()
     g_cost = {str(initial): 0}
 
     while open_set:
-        _, current, path = heappop(open_set)  # pop state with lowest f(n)
+        _, current, path = heappop(open_set)  
         if current == goal:
             print("Goal State Reached!")
             for step, (move, state) in enumerate(path, start=1):
@@ -114,7 +114,6 @@ def a_star_8_puzzle(initial, goal):
             f = new_g + h
             if str(node) not in g_cost or new_g < g_cost[str(node)]:
                 g_cost[str(node)] = new_g
-                # Add move and state to path
                 heappush(open_set, (f, node, path + [(move, node)]))
 
     print("No Solution Found")
